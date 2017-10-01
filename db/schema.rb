@@ -12,9 +12,12 @@
 
 ActiveRecord::Schema.define(version: 20170930121424) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "decisions", force: :cascade do |t|
     t.string "title"
-    t.integer "user_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_decisions_on_user_id"
@@ -24,7 +27,7 @@ ActiveRecord::Schema.define(version: 20170930121424) do
     t.string "description"
     t.string "category"
     t.integer "weight"
-    t.integer "decision_id"
+    t.bigint "decision_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["decision_id"], name: "index_items_on_decision_id"
@@ -36,4 +39,6 @@ ActiveRecord::Schema.define(version: 20170930121424) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "decisions", "users"
+  add_foreign_key "items", "decisions"
 end
