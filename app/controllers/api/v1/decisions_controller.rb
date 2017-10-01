@@ -1,9 +1,11 @@
 
 class Api::V1::DecisionsController < ApplicationController
+   before_action :current_user
 
   def index
-    @decisions = User.find_by(id: params[:user_id])&.books
-
+  
+    @decisions = User.find_by(id: params[:user_id])&.decisions
+    
     render 'decisions/decisions.json.jbuilder', decisions: @decisions
   end
 
@@ -11,7 +13,7 @@ class Api::V1::DecisionsController < ApplicationController
     @decision = Decision.find_by(id: params[:id])
 
     if @decision
-      render 'decision/decision.json.jubilder', decision: @decision
+      render 'decisions/decision.json.jbuilder', decision: @decision
     else
       render json: {
         errors: {
@@ -22,10 +24,11 @@ class Api::V1::DecisionsController < ApplicationController
   end
 
   def create
-
+  	
     @user = User.find_by(id: params[:user_id])
-
+      
     if @user.id == current_user.id
+    
       @decision = @user.decisions.new(decision_params)
 
       if @decision.save
@@ -36,6 +39,7 @@ class Api::V1::DecisionsController < ApplicationController
         }, status: 500
       end
 
+  	end
   end
 
   def update
@@ -75,6 +79,7 @@ def destroy
     }, status: 404
 
   end
+ end
 
   private
 

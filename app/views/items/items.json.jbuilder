@@ -1,1 +1,1 @@
-json.item @item
+json.items @items

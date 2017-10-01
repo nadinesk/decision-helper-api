@@ -1,10 +1,19 @@
-
 class Api::V1::ItemsController < ApplicationController
 
+  before_action :current_user
+  
   def index
+    
     @items = Decision.find_by(id: params[:decision_id])&.items
-    if @items
-      render 'items/items.json.jbuilder', items: @items
+    
+    if @items 
+    	render 'items/items.json.jbuilder', items: @items
+    else 
+    	render json: {
+    		errors: {
+    			message: "Page not found"
+    		}, status: 404
+    	}
     end
    end
 
@@ -22,6 +31,7 @@ class Api::V1::ItemsController < ApplicationController
    end
 
    def create
+   	
    	@user = User.find_by(id: params[:user_id])
 
     if @user.id == current_user.id
