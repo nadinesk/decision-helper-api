@@ -35,7 +35,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def login
-    binding.pry
+    
     @user = User.find_by(username: params[:user][:username])
 
     if !@user
