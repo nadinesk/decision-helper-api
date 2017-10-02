@@ -12,6 +12,7 @@ class Api::V1::UsersController < ApplicationController
     if @user.save
       render 'users/user.json.jbuilder', users: @users
     else
+      
       render json: {
         errors: @user.errors.full_Messages
       }, status: 500
@@ -34,12 +35,12 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def login
-    @user = User.find_by(email: params[:user][:username])
+    @user = User.find_by(username: params[:user][:username])
 
     if !@user
       render json: {
         errors: {
-          email: ["Unable to find a user with the provided email address"]
+          username: ["Unable to find a user with the provided email address"]
         }
       }, status: 500
       elsif @user

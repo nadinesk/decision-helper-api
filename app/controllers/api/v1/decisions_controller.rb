@@ -38,8 +38,11 @@ class Api::V1::DecisionsController < ApplicationController
             errors: @decision.errors.full_messages
         }, status: 500
       end
+      
 
   	end
+
+
   end
 
   def update
