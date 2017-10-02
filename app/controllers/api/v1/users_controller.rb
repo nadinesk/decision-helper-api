@@ -40,11 +40,11 @@ class Api::V1::UsersController < ApplicationController
     if !@user
       render json: {
         errors: {
-          username: ["Unable to find a user with the provided email address"]
+          username: ["Unable to find a user with the provided username"]
         }
       }, status: 500
       elsif @user
-        render 'users/user.json.jbuilder', users: @users
+        render 'users/user.json.jbuilder', user: @user
       end
   end
 
