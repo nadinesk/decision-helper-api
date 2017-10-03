@@ -8,7 +8,8 @@ Rails.application.routes.draw do
         	resources :items
       	end
       end
-       post'/login', to: "users#login"
+       post '/login', to: "users#login"
+       get '/current_user', to: "users#current"
     end
   end
 end

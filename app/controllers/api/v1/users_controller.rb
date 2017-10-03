@@ -1,5 +1,6 @@
 class Api::V1::UsersController < ApplicationController
 
+  before_action :current_user
   def index
     @users = User.all
     render 'users/users.json.jbuilder', users: @users
@@ -48,6 +49,15 @@ class Api::V1::UsersController < ApplicationController
         render 'users/user.json.jbuilder', user: @user
       end
   end
+
+   def current
+     
+     @user = current_user
+
+     render 'users/user.json.jbuilder', user: @user
+
+
+   end
 
   private
 
