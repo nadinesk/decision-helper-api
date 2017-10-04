@@ -56,10 +56,13 @@ class Api::V1::ItemsController < ApplicationController
   end
 
    def destroy
+     binding.pry
      item = Item.find(params[:id])
       if item
         item.destroy
-        head :no_contnet
+        @items = Decision.find_by(id: params[:decision_id])&.items
+        render '/items/items.json.jbuilder', items: @items
+        
       else
         render json: {
           errors: {
