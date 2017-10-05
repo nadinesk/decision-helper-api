@@ -1,5 +1,5 @@
 class Item < ApplicationRecord
-  belongs_to :decision
+  belongs_to :decision 
 
 
 

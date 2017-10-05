@@ -56,7 +56,7 @@ class Api::V1::ItemsController < ApplicationController
   end
 
    def destroy
-     binding.pry
+     
      item = Item.find(params[:id])
       if item
         item.destroy

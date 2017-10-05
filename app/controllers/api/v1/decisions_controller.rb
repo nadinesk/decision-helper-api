@@ -70,10 +70,11 @@ end
 
 def destroy
   decision = Decision.find_by(id: params[:id])
-
+  
   if decision
     decision.destroy
-    head :no_content
+    @decisions = User.find_by(id: params[:user_id])&.decisions
+    render '/decisions/decisions.json.jbuilder', decisions: @decisions
   else
     render json: {
       errors: {
