@@ -3,6 +3,8 @@ class Decision < ApplicationRecord
   
   has_many :items, dependent: :destroy
 
+  validates :title, presence: true
+
   def total
   	t = 0
    	self.items.each do |item|
